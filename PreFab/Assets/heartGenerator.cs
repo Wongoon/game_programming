@@ -5,7 +5,7 @@ using UnityEngine;
 public class heartGenerator : MonoBehaviour
 {
     public GameObject heartPreFab;
-    float span = 5.0f;
+    float span = 0.2f;
     float delta = 0;
 
     // Start is called before the first frame update

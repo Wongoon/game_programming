@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class dinoController : MonoBehaviour
 {
-    public int life = 5;
-    public GameObject Generator;
+    public float life = 3.0f;
+    public GameObject ItemGenerator;
+    public GameObject MeteorGenerator;
+    public GameDirector GameDirector;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +31,18 @@ public class dinoController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        life -= 1;
+        if(other.gameObject.tag == "Meteor"){
+            life -= 1.0f;
+            GameDirector.GetComponent<GameDirector>().Decrease();
+        }
+        if(other.gameObject.tag == "Item" && life < 3.0f){
+            life += 0.2f;
+            GameDirector.GetComponent<GameDirector>().Increase();
+        }
         if(life <= -1){
             Destroy(gameObject);
-            Destroy(Generator);
+            Destroy(ItemGenerator);
+            Destroy(MeteorGenerator);
         }
     }
 }
