@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
+    Animator anim;
     public float jump = 700;
     public float Walk = 30;
     public float MaxWalkSpeed = 2.0f;
@@ -13,13 +14,15 @@ public class playerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow)){
+        if(Input.GetKeyDown(KeyCode.UpArrow) && rb.velocity.y == 0){
             rb.AddForce(transform.up * jump);
+            anim.SetTrigger("JumpTrigger");
         }
         /*
         if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0)
@@ -50,6 +53,16 @@ public class playerController : MonoBehaviour
 
         if(dir != 0){
             transform.localScale = new Vector3(dir, 1, 1);
+        }
+
+        if(transform.position.y < -6 || transform.position.x > 3.5 || transform.position.x < -3.5){
+            SceneManager.LoadScene("GameScene");
+        }
+        if(rb.velocity.y == 0){
+            anim.speed = Speed / 2.0f;
+        }
+        else{
+            anim.speed = 1.0f;
         }
     }
 
