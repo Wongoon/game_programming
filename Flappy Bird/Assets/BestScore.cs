@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PipeController : MonoBehaviour
+public class BestScore : MonoBehaviour
 {
-    public float speed = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<Text>().text = "Best Score : " + GameOverScore.bestScore.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position -= transform.right * speed;
-        if (transform.position.x < -2.5f){
-            Destroy(gameObject);
-        }
+        
     }
 }

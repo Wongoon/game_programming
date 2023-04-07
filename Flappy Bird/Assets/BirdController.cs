@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BirdController : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class BirdController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
             rb.AddForce(transform.up * fly);
+        }
+
+        if(transform.position.x < -2.5f){
+            SceneManager.LoadScene("GameOverScene");
         }
     }
 }
