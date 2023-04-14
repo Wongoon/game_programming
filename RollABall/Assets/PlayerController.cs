@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float jump;
     public int itemCount = 0;
     public GameManager manager;
+    public float y;
+    bool isGround;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +22,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump") && rb.velocity.y == 0){
+        if(Input.GetButtonDown("Jump") && isGround){
             rb.AddForce(Vector3.up * jump);
         }
 
         if(transform.position.y < -2){
-            transform.position = new Vector3(0, 0.1f, 0);
+            transform.position = new Vector3(0, y, 0);
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -44,5 +47,12 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene("Stage" + (manager.Stage));
             }
         }
+    }
+
+    void OnCollisionStay(Collision other){
+        isGround = true;
+    }
+    void OnCollisionExit(Collision other){
+        isGround = false;
     }
 }

@@ -537,6 +537,7 @@ MonoBehaviour:
   jump: 300
   itemCount: 0
   manager: {fileID: 2035215603}
+  y: 0.1
 --- !u!135 &1483907462
 SphereCollider:
   m_ObjectHideFlags: 0
